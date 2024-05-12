@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Personajes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<div class="container">
+    <nav th:replace="~{navbar.html :: navbar}"></nav>
+    <div class="row mb-4">
+        <div class="col-md-6 offset-md-3">
+            <h2 th:text="${personaje.getId() == 0? 'Nuevo Personaje' : 'Editar Personaje'}"></h2>
+            <hr/>
+            <form method="post" th:action="@{'/personaje/save'}" th:object="${personaje}">
+                <input th:field="*{id}" type="hidden"/>
+                <div class="mb-3">
+                    <label class="form-label">Nombre</label>
+                    <input th:field="*{name}" type="text" class="form-control"/>
+                    <div class="text-danger" th:if="${#fields.hasErrors('name')}"
+                         th:errors="*{name}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Wiki URL (https://marvel.fandom.com/wiki) </label>
+                    <input th:field="*{url}" type="text" class="form-control"/>
+                    <div class="text-danger" th:if="${#fields.hasErrors('url')}"
+                         th:errors="*{url}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Identidad</label>
+                    <input th:field="*{identity}" type="text" class="form-control"/>
+                    <div class="text-danger" th:if="${#fields.hasErrors('identity')}"
+                         th:errors="*{identity}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Alineación</label>
+                    <input th:field="*{align}" type="text" class="form-control"/>
+                    <div class="text-danger" th:if="${#fields.hasErrors('align')}"
+                         th:errors="*{align}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Ojo</label>
+                    <input th:field="*{eye}" type="text" class="form-control"/>
+                    <div class="text-danger" th:if="${#fields.hasErrors('eye')}"
+                         th:errors="*{eye}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Cabello</label>
+                    <input th:field="*{hair}" type="text" class="form-control"/>
+                    <div class="text-danger" th:if="${#fields.hasErrors('hair')}"
+                         th:errors="*{hair}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Sexo</label>
+                    <input th:field="*{sex}" type="text" class="form-control"/>
+                    <div class="text-danger" th:if="${#fields.hasErrors('sex')}"
+                         th:errors="*{sex}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">GSM</label>
+                    <input th:field="*{gsm}" type="text" class="form-control"/>
+                    <div class="text-danger" th:if="${#fields.hasErrors('gsm')}"
+                         th:errors="*{gsm}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Alive</label>
+                    <input th:field="*{alive}" type="text" class="form-control"/>
+                    <div class="text-danger" th:if="${#fields.hasErrors('alive')}"
+                         th:errors="*{alive}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Apariciones</label>
+                    <input th:field="*{appearances}" type="number" class="form-control"/>
+                    <div class="text-danger" th:if="${#fields.hasErrors('appearances')}"
+                         th:errors="*{appearances}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Primera aparición</label>
+                    <input th:field="*{firstAppearance}" type="text" class="form-control"/>
+                    <div class="text-danger" th:if="${#fields.hasErrors('firstAppearance')}"
+                         th:errors="*{firstAppearance}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Año</label>
+                    <input th:field="*{year}" type="number" class="form-control"/>
+                    <div class="text-danger" th:if="${#fields.hasErrors('year')}"
+                         th:errors="*{year}"></div>
+                </div>
+
+                <a th:href="@{'/personaje/list'}" class="btn btn-danger">Cancelar</a>
+                <button type="submit" class="btn btn-primary" th:text="${personaje.id == 0? 'Registrar' : 'Actualizar'}"></button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
