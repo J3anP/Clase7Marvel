@@ -32,25 +32,26 @@ public class WSController {
     //Métodos
 
     //OBTENER
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/get/{id}")
     public ResponseEntity<HashMap<String, Object>> buscarPersonaje(@PathVariable("id") String idStr) {
+
+        HashMap<String, Object> respuesta = new HashMap<>();
 
         try {
             int id = Integer.parseInt(idStr);
             Optional<Character> byId = characterRepository.findById(id);
-
-            HashMap<String, Object> respuesta = new HashMap<>();
-
             if (byId.isPresent()) {
                 respuesta.put("", byId.get());
                 return ResponseEntity.ok(respuesta);
             } else {
                 respuesta.put("error", "ID Personaje NO encontrado.");
                 respuesta.put("date", LocalDateTime.now());
+                return ResponseEntity.badRequest().body(respuesta);
             }
-            return ResponseEntity.ok(respuesta);
         } catch (NumberFormatException e) {
-            return ResponseEntity.badRequest().body(null);
+            respuesta.put("error", "ID Personaje debe ser un número entero.");
+            respuesta.put("date", LocalDateTime.now());
+            return ResponseEntity.badRequest().body(respuesta);
         }
     }
 
