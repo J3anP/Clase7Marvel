@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:fragment="header (title)">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+        <title th:text="${title}"></title>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4" th:fragment="navbar">
+            <div class="mx-2" sec:authorize=" isAuthenticated()">
+                <span th:text="|Bienvenido ${session.usuario.getFullname()} - ${session.usuario.getEmail()} - ${#authentication.authorities[0]}|"></span>
+                <form th:action="@{/logout}" method="post">
+                    <input class="btn btn-link" type="submit" value="(Cerrar Sesión)">
+                </form>
+            </div>
+        </nav>
+    </body>
+</html>
